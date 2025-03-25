@@ -9,7 +9,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pages:build": "npm install -g wrangler && next build",
+    "deploy": "wrangler pages deploy .next",
+    "preview": "wrangler pages dev .next"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -69,6 +72,7 @@
     "zod": "latest"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.10",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",

@@ -15,12 +15,19 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: ['*']
   },
+  output: 'standalone',
   experimental: {
     webpackBuildWorker: true,
     parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
+    parallelServerCompiles: true
   },
+  env: {
+    CLOUDFLARE_WORKER: 'true'
+  },
+  poweredByHeader: false,
+  reactStrictMode: true
 }
 
 mergeConfig(nextConfig, userConfig)
