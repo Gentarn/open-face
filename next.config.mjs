@@ -17,7 +17,6 @@ const nextConfig = {
     unoptimized: true,
     domains: ['*']
   },
-  output: 'export',
   images: {
     unoptimized: true,
     domains: ['*']
