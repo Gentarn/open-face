@@ -2,7 +2,10 @@ name = "open-face-site"
 compatibility_date = "2024-03-25"
 
 [build]
-command = "pnpm build"
+command = "pnpm pages:build"
+
+[site]
+bucket = ".vercel/output/static"
 
 [build.processing]
 skip_source_maps = true
@@ -10,10 +13,6 @@ skip_source_maps = true
 [build.processing.css]
 bundle = true
 minify = true
-
-[build.output]
-base_path = ".next"
-pages_build_output_dir = ".next"
 
 [env.production]
 node_compat = true
