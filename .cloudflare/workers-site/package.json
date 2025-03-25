@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "main": "./dist/worker.js",
+  "scripts": {
+    "build": "pnpm install && pnpm build"
+  },
+  "engines": {
+    "node": "^20.0.0"
+  }
+}
