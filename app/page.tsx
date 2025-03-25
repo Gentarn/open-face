@@ -275,13 +275,6 @@ export default function Home() {
           <p className="text-center text-gray-600">Copyright © 2025 OpenFace LLC All rights reserved</p>
         </div>
       </footer>
-
-      {/* Thank You ポップアップ */}
-      {showThankYou && state.success && (
-        <ThankYouPopup
-          message={state.message || "お問い合わせありがとうございます。メッセージが送信されました。"}
-          onClose={() => setShowThankYou(false)}
-        />
       )}
     </div>
   )
