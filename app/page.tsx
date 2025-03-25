@@ -1,28 +1,45 @@
 "use client"
 
 import { useState } from "react"
-import { useActionState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Twitter, Linkedin, Facebook, MapPin, Mail, Heart, Menu, X } from "lucide-react"
-import { submitContactForm, type FormState } from "./actions"
-import { ThankYouPopup } from "@/components/ui/thank-you-popup"
-import ReCAPTCHA from "react-google-recaptcha"
-
-const initialState: FormState = {}
+import { ContactForm } from "@/app/components/contact-form"
 
 export default function Home() {
-  const [state, formAction] = useActionState(submitContactForm, initialState)
-  const [showThankYou, setShowThankYou] = useState(false)
-  const [captchaToken, setCaptchaToken] = useState<string>("")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  // フォーム送信成功時にポップアップを表示
-  if (state.success && !showThankYou) {
-    setShowThankYou(true)
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: JSON.stringify({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
+          captchaToken: captchaToken
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      const data = await response.json()
+      setFormState(data)
+      if (data.success) {
+        setShowThankYou(true)
+      }
+    } catch (error) {
+      setFormState({
+        success: false,
+        message: "エラーが発生しました。後でもう一度お試しください。",
+        errors: {}
+      })
+    }
   }
 
   const toggleMenu = () => {
@@ -280,39 +297,7 @@ export default function Home() {
       {/* コンタクトフォーム */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 max-w-xl">
-          <form action={formAction} className="space-y-8">
-            <div>
-              <Input name="name" placeholder="Name(氏名)" className="w-full border-gray-300 text-gray-800" />
-              {state.errors?.name && <p className="text-red-500 text-sm mt-1">{state.errors.name[0]}</p>}
-            </div>
-            <div>
-              <Input name="email" type="email" placeholder="Email" className="w-full border-gray-300 text-gray-800" />
-              {state.errors?.email && <p className="text-red-500 text-sm mt-1">{state.errors.email[0]}</p>}
-            </div>
-            <div>
-              <Textarea
-                name="message"
-                placeholder="Message（内容をご記入ください）"
-                rows={6}
-                className="w-full border-gray-300 text-gray-800"
-              />
-              {state.errors?.message && <p className="text-red-500 text-sm mt-1">{state.errors.message[0]}</p>}
-            </div>
-            <div className="flex justify-center">
-              <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                onChange={(token) => setCaptchaToken(token || '')}
-              />
-            </div>
-            {state.errors?.captchaToken && (
-              <p className="text-red-500 text-sm text-center">{state.errors.captchaToken[0]}</p>
-            )}
-            <div className="text-center">
-              <Button type="submit" className="bg-secondary hover:bg-secondary/90 text-white rounded-full px-12">
-                送信 - Send Message
-              </Button>
-            </div>
-          </form>
+          <ContactForm />
         </div>
       </section>
 

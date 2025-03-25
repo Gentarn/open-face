@@ -10,9 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "pages:build": "npm install -g wrangler && next build",
-    "deploy": "wrangler pages deploy .next",
-    "preview": "wrangler pages dev .next"
+    "export": "next build && next export"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

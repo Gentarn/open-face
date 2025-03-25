@@ -17,14 +17,10 @@ const nextConfig = {
     unoptimized: true,
     domains: ['*']
   },
-  output: 'standalone',
-  experimental: {
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true
-  },
-  env: {
-    CLOUDFLARE_WORKER: 'true'
+  output: 'export',
+  images: {
+    unoptimized: true,
+    domains: ['*']
   },
   poweredByHeader: false,
   reactStrictMode: true
