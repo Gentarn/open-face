@@ -10,38 +10,6 @@ import { ContactForm } from "@/app/components/contact-form"
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    const formData = new FormData(event.currentTarget)
-    
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        body: JSON.stringify({
-          name: formData.get('name'),
-          email: formData.get('email'),
-          message: formData.get('message'),
-          captchaToken: captchaToken
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-
-      const data = await response.json()
-      setFormState(data)
-      if (data.success) {
-        setShowThankYou(true)
-      }
-    } catch (error) {
-      setFormState({
-        success: false,
-        message: "エラーが発生しました。後でもう一度お試しください。",
-        errors: {}
-      })
-    }
-  }
-
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
