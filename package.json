@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next build && next export"
+    "pages:build": "@cloudflare/next-on-pages",
+    "pages:deploy": "pnpm build && wrangler pages deploy .next"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
