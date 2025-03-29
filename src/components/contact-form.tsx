@@ -1,4 +1,3 @@
-"use client"
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
@@ -34,12 +33,12 @@ export function ContactForm() {
           name: formData.get('name'),
           email: formData.get('email'),
           message: formData.get('message'),
-          captchaToken: captchaToken
+          captchaToken: captchaToken,
         }),
         headers: {
-          'Content-Type': 'application/json'
-        }
-      })
+          'Content-Type': 'application/json',
+        },
+      });
 
       const data = await response.json()
       setFormState(data)

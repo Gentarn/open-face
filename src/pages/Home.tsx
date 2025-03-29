@@ -1,11 +1,10 @@
-"use client"
 
 import { useState } from "react"
-import Image from "next/image"
+import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Twitter, Linkedin, Facebook, MapPin, Mail, Heart, Menu, X } from "lucide-react"
-import { ContactForm } from "@/app/components/contact-form"
+import { ContactForm } from "@/components/contact-form";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -20,27 +19,27 @@ export default function Home() {
 
   const MenuItems = () => (
     <>
-      <a
-        href="#services"
+      <Link
+        to="/"
         className="font-serif hover:text-gold transition-colors block md:inline"
         onClick={closeMenu}
       >
         OUR SERVICE
-      </a>
-      <a
-        href="#about"
+      </Link>
+      <Link
+        to="/#about"
         className="font-serif hover:text-gold transition-colors block md:inline"
         onClick={closeMenu}
       >
         ABOUT US
-      </a>
-      <a
-        href="#contact"
+      </Link>
+      <Link
+        to="/contact"
         className="font-serif hover:text-gold transition-colors block md:inline"
         onClick={closeMenu}
       >
         CONTACT
-      </a>
+      </Link>
     </>
   )
 
@@ -51,11 +50,11 @@ export default function Home() {
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center gap-4">
             <div className="h-10">
-              <img
-                src="/images/logo.png"
-                alt="OPEN FACE LLC"
-                className="h-full w-auto"
-              />
+              <img src="/images/logo.png" alt="OPEN FACE LLC" className="h-full w-auto" />
+            </div>
+=======
+            <div className="h-10">
+              <img src="/images/logo.png" alt="OPEN FACE LLC" className="h-full w-auto" />
             </div>
             <span className="font-serif text-2xl">OPEN FACE LLC</span>
           </div>
